@@ -18,7 +18,7 @@ function VotingPage({ user, parties, onLogout }) {
       setVoted(true);
       setParty(parties.find((p) => p.id === storedUserVotes[user.email]));
     }
-  }, []);
+  }, [parties, user]);
 
   useEffect(() => {
     localStorage.setItem("votes", JSON.stringify(votes));
@@ -51,10 +51,6 @@ function VotingPage({ user, parties, onLogout }) {
       ...prevUserVotes,
       [user.email]: undefined,
     }));
-  };
-
-  const getPartyCount = (partyId) => {
-    return votes[partyId] || 0;
   };
 
   return (
