@@ -11,7 +11,6 @@ function Login({ onLogin }) {
   const handleLogin = (event) => {
     event.preventDefault();
     const user = getUser(email, password);
-    console.log(user);
     if (user) {
       onLogin(user);
     } else {

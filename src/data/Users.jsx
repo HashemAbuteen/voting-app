@@ -185,3 +185,4 @@ function getUser(email, password) {
   return usersList.find((u) => u.email === email && u.password === password);
 }
 export default getUser;
+export { usersList };

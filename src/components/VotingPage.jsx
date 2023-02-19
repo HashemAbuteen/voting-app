@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Admin from "./Admin";
 import PartyCard from "./PartyCard";
 
 function VotingPage({ user, parties, onLogout }) {
@@ -6,6 +7,7 @@ function VotingPage({ user, parties, onLogout }) {
   const [userVotes, setUserVotes] = useState({});
   const [voted, setVoted] = useState(false);
   const [party, setParty] = useState();
+  const [openAdminPage, setOpenAdminPage] = useState(false);
 
   useEffect(() => {
     const storedVotes = JSON.parse(localStorage.getItem("votes")) || {};
@@ -53,15 +55,24 @@ function VotingPage({ user, parties, onLogout }) {
     }));
   };
 
+  const goToAdmin = () => {
+    setOpenAdminPage(true);
+  };
+
+  const logout = () => {
+    onLogout();
+  };
+
   return (
     <div>
       <header>
         <h1>
           Welcome, {user.name} ({user.type})
         </h1>
-        <button onClick={onLogout}>Logout</button>
+        <button onClick={logout}>Logout</button>
       </header>
-      {voted || (
+      {openAdminPage && <Admin uservotes={userVotes}></Admin>}
+      {openAdminPage || voted || (
         <main>
           <h2>Select your preferred political party:</h2>
           <div className="party-list">
@@ -76,12 +87,16 @@ function VotingPage({ user, parties, onLogout }) {
           </div>
         </main>
       )}
-      {voted && (
-        <main>
-          <p>You voted for {party.name}.</p>
-          <button onClick={handleClearVote}>Change Vote</button>
-        </main>
-      )}
+      {openAdminPage ||
+        (voted && (
+          <main>
+            <p>You voted for {party.name}.</p>
+            <button onClick={handleClearVote}>Change Vote</button>
+            {user.type === "admin" && (
+              <button onClick={goToAdmin}>Admin Page</button>
+            )}
+          </main>
+        ))}
     </div>
   );
 }

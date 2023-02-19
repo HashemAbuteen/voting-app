@@ -43,7 +43,6 @@ function App() {
     setUser(null);
     setLoggedIn(false);
   }
-  console.log(user);
   return (
     <>
       {isLoggedIn || <Login onLogin={login}></Login>}
