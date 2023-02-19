@@ -71,7 +71,9 @@ function VotingPage({ user, parties, onLogout }) {
         </h1>
         <button onClick={logout}>Logout</button>
       </header>
-      {openAdminPage && <Admin uservotes={userVotes}></Admin>}
+      {openAdminPage && (
+        <Admin uservotes={userVotes} parties={parties} votes={votes}></Admin>
+      )}
       {openAdminPage || voted || (
         <main>
           <h2>Select your preferred political party:</h2>
