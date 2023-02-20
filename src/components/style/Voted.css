@@ -1,0 +1,10 @@
+.voted{
+    padding: 2rem;
+    font-size: 1.5rem;
+}
+.voted p , .voted button {
+    margin:1rem;
+}
+.voted button{
+    font-size: 1.3rem;
+}

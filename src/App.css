@@ -3,9 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    background-color: #1c1c1c;
+    color: #fff;
+}
 button{
     padding: 10px;
-    background-color: #0077b6;
+    background-color: #ff69b4;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -13,5 +17,5 @@ button{
     transition: background-color 0.2s ease;
 }
 button:hover{
-    background-color: #023e8a;
+    background-color: #ffa500;
 }

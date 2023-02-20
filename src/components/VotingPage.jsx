@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Admin from "./Admin";
 import Header from "./Header";
-import PartyCard from "./PartyCard";
+import PartyCardsList from "./PartyCardsList";
+import "./style/VotingPage.css";
+import Voted from "./Voted";
 
 function VotingPage({ user, parties, onLogout }) {
   const [votes, setVotes] = useState(getVotes());
@@ -80,31 +82,29 @@ function VotingPage({ user, parties, onLogout }) {
         goToVoting={goToVoting}
       ></Header>
       {openAdminPage && (
-        <Admin uservotes={userVotes} parties={parties} votes={votes}></Admin>
+        <main>
+          <Admin uservotes={userVotes} parties={parties} votes={votes}></Admin>
+        </main>
       )}
       {openAdminPage || didVote() || (
         <main>
-          <h2>Select your preferred political party:</h2>
-          <div className="party-list">
-            {parties.map((party) => (
-              <PartyCard
-                key={party.id}
-                party={party}
-                onVote={handleVote}
-                partyCount={votes[party.id] || 0}
-              />
-            ))}
-          </div>
+          <PartyCardsList
+            parties={parties}
+            handleVote={handleVote}
+            votes={votes}
+          />
         </main>
       )}
       {openAdminPage ||
         (didVote() && (
           <main>
-            <p>You voted for {getVotedForParty().name}.</p>
-            <button onClick={handleClearVote}>Change Vote</button>
-            {user.type === "admin" && (
-              <button onClick={goToAdmin}>Admin Page</button>
-            )}
+            <Voted
+              votedForParty={getVotedForParty()}
+              handleClearVote={handleClearVote}
+              user={user}
+              goToAdmin={goToAdmin}
+              logout={logout}
+            />
           </main>
         ))}
     </>

@@ -1,3 +1,4 @@
+import "./style/PartyCard.css";
 function PartyCard({ party, onVote, partyCount }) {
   const handleVote = () => {
     onVote(party.id);
