@@ -5,19 +5,15 @@ function Header({ name, isAdmin, logout, goToAdmin, goToVoting }) {
       <header>
         <p>Welcome {name}</p>
         <nav>
-          {isAdmin ? (
+          {isAdmin && (
             <button className="nav-item" onClick={goToAdmin}>
               Admin Page
             </button>
-          ) : (
-            <></>
           )}
-          {isAdmin ? (
+          {isAdmin && (
             <button className="nav-item" onClick={goToVoting}>
               Voting Page
             </button>
-          ) : (
-            <></>
           )}
           <button className="nav-item" onClick={logout}>
             Logout

@@ -71,7 +71,7 @@ function VotingPage({ user, parties, onLogout }) {
   };
 
   return (
-    <div>
+    <>
       <Header
         name={user.name}
         isAdmin={user.type === "admin"}
@@ -107,7 +107,7 @@ function VotingPage({ user, parties, onLogout }) {
             )}
           </main>
         ))}
-    </div>
+    </>
   );
 }
 
