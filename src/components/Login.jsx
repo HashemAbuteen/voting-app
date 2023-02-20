@@ -23,12 +23,14 @@ function Login({ onLogin }) {
       <form className="login-form" onSubmit={handleLogin}>
         <label>Email:</label>
         <input
+          autoComplete="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <label>Password:</label>
         <input
+          autoComplete="current-password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -37,7 +39,7 @@ function Login({ onLogin }) {
       </form>
       {showPopup && (
         <Popup
-          message="Email and password do not match any user."
+          message="Invalid login credentials. Please check your email and password and try again"
           onClose={() => setShowPopup(false)}
         />
       )}
