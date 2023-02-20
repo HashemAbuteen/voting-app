@@ -1,32 +1,35 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Admin from "./Admin";
 import PartyCard from "./PartyCard";
 
 function VotingPage({ user, parties, onLogout }) {
-  const [votes, setVotes] = useState({});
-  const [userVotes, setUserVotes] = useState({});
-  const [voted, setVoted] = useState(false);
-  const [party, setParty] = useState();
+  const [votes, setVotes] = useState(getVotes());
+  const [userVotes, setUserVotes] = useState(getUserVotes());
   const [openAdminPage, setOpenAdminPage] = useState(false);
 
-  useEffect(() => {
-    const storedVotes = JSON.parse(localStorage.getItem("votes")) || {};
-    setVotes(storedVotes);
+  function getVotes() {
+    return JSON.parse(localStorage.getItem("votes")) || {};
+  }
 
-    const storedUserVotes = JSON.parse(localStorage.getItem("userVotes")) || {};
-    setUserVotes(storedUserVotes);
-
-    if (storedUserVotes[user.email]) {
-      setVoted(true);
-      setParty(parties.find((p) => p.id === storedUserVotes[user.email]));
+  function getUserVotes() {
+    return JSON.parse(localStorage.getItem("userVotes")) || {};
+  }
+  function didVote() {
+    if (userVotes[user.email]) {
+      return true;
     }
-  }, [parties, user]);
+    return false;
+  }
 
-  useEffect(() => {
+  function getVotedForParty() {
+    return parties.find((p) => p.id === userVotes[user.email]);
+  }
+
+  function updateStorage() {
     localStorage.setItem("votes", JSON.stringify(votes));
 
     localStorage.setItem("userVotes", JSON.stringify(userVotes));
-  }, [votes, userVotes]);
+  }
 
   const handleVote = (partyId) => {
     setVotes((prevVotes) => ({
@@ -38,21 +41,20 @@ function VotingPage({ user, parties, onLogout }) {
       ...prevUserVotes,
       [user.email]: partyId,
     }));
-    setVoted(true);
-    setParty(parties.find((p) => p.id === partyId));
+    updateStorage();
   };
 
   const handleClearVote = () => {
-    setVoted(false);
-    setParty(undefined);
+    const votedForParty = getVotedForParty();
     setVotes((prevVotes) => ({
       ...prevVotes,
-      [party.id]: prevVotes[party.id] - 1,
+      [votedForParty.id]: prevVotes[votedForParty.id] - 1,
     }));
     setUserVotes((prevUserVotes) => ({
       ...prevUserVotes,
       [user.email]: undefined,
     }));
+    updateStorage();
   };
 
   const goToAdmin = () => {
@@ -74,7 +76,7 @@ function VotingPage({ user, parties, onLogout }) {
       {openAdminPage && (
         <Admin uservotes={userVotes} parties={parties} votes={votes}></Admin>
       )}
-      {openAdminPage || voted || (
+      {openAdminPage || didVote() || (
         <main>
           <h2>Select your preferred political party:</h2>
           <div className="party-list">
@@ -90,9 +92,9 @@ function VotingPage({ user, parties, onLogout }) {
         </main>
       )}
       {openAdminPage ||
-        (voted && (
+        (didVote() && (
           <main>
-            <p>You voted for {party.name}.</p>
+            <p>You voted for {getVotedForParty().name}.</p>
             <button onClick={handleClearVote}>Change Vote</button>
             {user.type === "admin" && (
               <button onClick={goToAdmin}>Admin Page</button>
