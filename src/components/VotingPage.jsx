@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Admin from "./Admin";
 import Header from "./Header";
 import PartyCardsList from "./PartyCardsList";
@@ -28,11 +28,11 @@ function VotingPage({ user, parties, onLogout }) {
     return parties.find((p) => p.id === userVotes[user.email]);
   }
 
-  function updateStorage() {
+  useEffect(() => {
     localStorage.setItem("votes", JSON.stringify(votes));
 
     localStorage.setItem("userVotes", JSON.stringify(userVotes));
-  }
+  }, [votes, userVotes]);
 
   const handleVote = (partyId) => {
     setVotes((prevVotes) => ({
@@ -44,7 +44,6 @@ function VotingPage({ user, parties, onLogout }) {
       ...prevUserVotes,
       [user.email]: partyId,
     }));
-    updateStorage();
   };
 
   const handleClearVote = () => {
@@ -57,7 +56,6 @@ function VotingPage({ user, parties, onLogout }) {
       ...prevUserVotes,
       [user.email]: undefined,
     }));
-    updateStorage();
   };
 
   const goToAdmin = () => {
