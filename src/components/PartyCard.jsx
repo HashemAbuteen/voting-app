@@ -8,7 +8,6 @@ function PartyCard({ party, onVote, partyCount }) {
       <img src={party.image} alt={party.name} />
       <h2>{party.name}</h2>
       <h3>votes: {partyCount}</h3>
-      <p>{party.info}</p>
       <button onClick={handleVote}>Vote for {party.name}</button>
     </div>
   );
