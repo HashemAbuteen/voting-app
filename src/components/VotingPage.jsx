@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Admin from "./Admin";
+import Header from "./Header";
 import PartyCard from "./PartyCard";
 
 function VotingPage({ user, parties, onLogout }) {
@@ -65,14 +66,19 @@ function VotingPage({ user, parties, onLogout }) {
     onLogout();
   };
 
+  const goToVoting = () => {
+    setOpenAdminPage(false);
+  };
+
   return (
     <div>
-      <header>
-        <h1>
-          Welcome, {user.name} ({user.type})
-        </h1>
-        <button onClick={logout}>Logout</button>
-      </header>
+      <Header
+        name={user.name}
+        isAdmin={user.type === "admin"}
+        logout={logout}
+        goToAdmin={goToAdmin}
+        goToVoting={goToVoting}
+      ></Header>
       {openAdminPage && (
         <Admin uservotes={userVotes} parties={parties} votes={votes}></Admin>
       )}

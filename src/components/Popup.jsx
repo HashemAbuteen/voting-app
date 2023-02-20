@@ -1,4 +1,4 @@
-import "./Popup.css";
+import "./style/Popup.css";
 function Popup({ message, onClose }) {
   return (
     <>

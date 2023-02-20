@@ -1,7 +1,7 @@
 import { useState } from "react";
 import getUser from "../data/Users";
 import Popup from "./Popup";
-import "./Login.css";
+import "./style/Login.css";
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState("");
