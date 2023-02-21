@@ -1,4 +1,5 @@
 import { usersList } from "../data/Users";
+import "./style/Admin.css";
 function Admin({ uservotes, parties, votes }) {
   function didVote(user) {
     if (uservotes[user.email]) {
@@ -7,9 +8,9 @@ function Admin({ uservotes, parties, votes }) {
     return false;
   }
   return (
-    <>
-      <h3>Users</h3>
-      <table>
+    <div className="admin-dashboard">
+      <table className="admin-table admin-user-data">
+        <caption>Users Data</caption>
         <thead>
           <tr>
             <td>name</td>
@@ -19,7 +20,14 @@ function Admin({ uservotes, parties, votes }) {
         </thead>
         <tbody>
           {usersList.map((user) => (
-            <tr key={user.email}>
+            <tr
+              key={user.email}
+              className={
+                didVote(user)
+                  ? "admin-table-voted-row"
+                  : "admin-table-not-voted-row"
+              }
+            >
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{didVote(user) ? "yes" : "no"}</td>
@@ -37,7 +45,7 @@ function Admin({ uservotes, parties, votes }) {
           ))}
         </ul>
       }
-    </>
+    </div>
   );
 }
 
