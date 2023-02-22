@@ -10,7 +10,6 @@
     height: auto;
 }
 .admin-dashboard-left-section{
-    width: 50%;
     min-width: 400px;
     display: flex;
     flex-direction: column;
@@ -34,4 +33,19 @@
 }
 .admin-table-voted-row{
     background-color: green;
+}
+.admin-dashboard-right-section{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+}
+.admin-dashboard-chart-container{
+    box-shadow: rgba(3, 3, 3, 0.1) 0px 2px 10px;
+    border-radius: 10px;
+    padding: 2rem;
+    max-width: 500px;
+}
+.admin-dashboard-chart-container h2 {
+    margin-bottom: 1rem;
 }
