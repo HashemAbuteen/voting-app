@@ -1,5 +1,8 @@
 .voting-page-party-list{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 50px;
+    padding: 50px;
 }

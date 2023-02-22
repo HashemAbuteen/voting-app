@@ -6,10 +6,16 @@ function PartyCard({ party, onVote, partyCount }) {
 
   return (
     <div className="party-card">
-      <img src={party.image} alt={party.name} />
-      <h2>{party.name}</h2>
-      <h3>votes: {partyCount}</h3>
-      <button onClick={handleVote}>Vote for {party.name}</button>
+      <div className="party-card-top">
+        <img src={party.image} alt={party.name} />
+        <div className="party-card-name">
+          <h2>{party.name}</h2>
+          <h3>votes: {partyCount}</h3>
+        </div>
+      </div>
+      <div className="party-card-button-div">
+        <button onClick={handleVote}>Vote for {party.name}</button>
+      </div>
     </div>
   );
 }

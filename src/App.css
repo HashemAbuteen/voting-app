@@ -4,18 +4,22 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #1c1c1c;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
 }
 button{
     padding: 10px;
-    background-color: #ff69b4;
+    background-color: #2AD2C9;
     color: #fff;
-    border: none;
-    border-radius: 5px;
+    border: #030303 1px solid;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    font-size: 14px;
+    line-height: 16px;
+    box-shadow: rgba(3, 3, 3, 0.1) 0px 0px 10px;
+    min-width: 120px;
+    height: 36px;
 }
-button:hover{
-    background-color: #ffa500;
+main{
+    height: 100vh;
 }
