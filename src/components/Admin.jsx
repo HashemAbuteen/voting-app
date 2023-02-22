@@ -35,32 +35,37 @@ function Admin({ uservotes, parties, votes }) {
   }
   return (
     <div className="admin-dashboard">
-      <table className="admin-table admin-user-data">
-        <caption>Users Data</caption>
-        <thead>
-          <tr>
-            <td>name</td>
-            <td>email</td>
-            <td>voted?</td>
-          </tr>
-        </thead>
-        <tbody>
-          {usersList.map((user) => (
-            <tr
-              key={user.email}
-              className={
-                didVote(user)
-                  ? "admin-table-voted-row"
-                  : "admin-table-not-voted-row"
-              }
-            >
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{didVote(user) ? "yes" : "no"}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="admin-dashboard-left-section">
+        <h2>Users Data</h2>
+
+        <div className="admin-dashboard-table-container">
+          <table className="admin-table admin-user-data">
+            <thead>
+              <tr>
+                <td>name</td>
+                <td>email</td>
+                <td>voted?</td>
+              </tr>
+            </thead>
+            <tbody>
+              {usersList.map((user) => (
+                <tr
+                  key={user.email}
+                  className={
+                    didVote(user)
+                      ? "admin-table-voted-row"
+                      : "admin-table-not-voted-row"
+                  }
+                >
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{didVote(user) ? "yes" : "no"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
       <Pie data={chartdata} />
     </div>
   );
