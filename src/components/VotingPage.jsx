@@ -52,10 +52,8 @@ function VotingPage({ user, parties, onLogout }) {
       ...prevVotes,
       [votedForParty.id]: prevVotes[votedForParty.id] - 1,
     }));
-    setUserVotes((prevUserVotes) => ({
-      ...prevUserVotes,
-      [user.email]: undefined,
-    }));
+    delete userVotes[user.email];
+    setUserVotes(userVotes);
   };
 
   const goToAdmin = () => {
